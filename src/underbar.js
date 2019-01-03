@@ -42,17 +42,17 @@
   // if n is 0 return []
   // if n is greater then length of array return the entire array
   //if n > 1 slice the elements from n till length-1 .
-    if(n === undefined){
-      return array[array.length-1];
+    if (n === undefined) {
+      return array[array.length - 1];
     }
-    if(n === 0){
+    if (n === 0) {
       return [];
     }
-    if(n > array.length-1){
+    if (n > array.length - 1) {
       return array;
     }
-    if(n > 1){
-      return array.slice(n-1, array.length);
+    if (n > 1) {
+      return array.slice(n - 1, array.length);
     }
   };
 
@@ -62,15 +62,19 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function(collection, iterator) {
-    // if collection is array
-    // loop through it
-    // if collection is object
-    // loop through the values 
-    if(Array.isArray(collection)){
+  //   if collection is array
+  //   loop through it
+  //   if collection is object
+  //   loop through the values 
+    if (Array.isArray(collection)) {
+      if (collection.length === 0) {  
+        return;
+      }
       var result = [];
-      for(var i = 0; i < collection.length;i++){
-        result.push(collection[i]);
+      for (var i = 0; i < collection.length; i++) {
+        result.push(iterator(collection[i]), i, collection);
       }  
+      return result;
     }
   };
 
