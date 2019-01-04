@@ -67,14 +67,13 @@
   //   if collection is object
   //   loop through the values 
     if (Array.isArray(collection)) {
-      if (collection.length === 0) {  
-        return;
-      }
-      var result = [];
       for (var i = 0; i < collection.length; i++) {
-        result.push(iterator(collection[i]), i, collection);
+        iterator(collection[i], i, collection);
       }  
-      return result;
+    } else {
+      for (var key in collection) {
+        iterator(collection[key], key, collection);
+      }
     }
   };
 
@@ -97,12 +96,32 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
+  //  declare a result array and return it after performing operations on it
+  // loop through the collection
+  // apply the test
+  // if it passes the test push to the result
+  // return result
+    var result = [];
+    for (var i = 0; i < collection.length; i++) {
+      if (test(collection[i])) {
+        result.push(collection[i]);
+      }
+    }
+    return result;
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+
+    var result = [];
+    for (var i = 0; i < collection.length; i++) {
+      if (!test(collection[i])) {
+        result.push(collection[i]);
+      }
+    }
+    return result;
   };
 
   // Produce a duplicate-free version of the array.
